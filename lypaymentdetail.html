@@ -12,7 +12,7 @@
 	<script src="static/js/commonpay.js"></script>
     <script type="text/javascript">
     
-	    var webroot = getRefererParam("basePageUrl");
+	    var webroot = unescape(getRefererParam("basePageUrl"));
 	    addcss(webroot+"static/css/header.css");
 	    addcss(webroot+"static/css/common.css");
 	    addcss(webroot+"static/css/common/coupons.css");
