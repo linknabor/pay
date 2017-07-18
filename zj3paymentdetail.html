@@ -13,13 +13,13 @@
     <script type="text/javascript">
     
 	    var webroot = unescape(getRefererParam("basePageUrl"));
+		webroot = "http://www.e-shequ.com/weixin/";
+		addscript(webroot+"static/js/common_v4.js?v=1");		
 	    addcss(webroot+"static/css/header.css");
 	    addcss(webroot+"static/css/common.css");
 	    addcss(webroot+"static/css/common/coupons.css");
-	    addscript(webroot+"static/js/common_v3.js");
-	    addscript(webroot+"common/coupons.js");
-	    addscript(webroot+"paymentdetail.js");
-	    	
+	    addscript(webroot+"paymentdetail2.js?v=21");
+		addscript(webroot+"common/coupons.js");	    	
 	</script>
     
 
@@ -135,7 +135,7 @@
 		</div>
 		<div class="line p15 highlight" style="height:20px; margin-bottom: 15px;">
 				<span class="fl fs15">支付金额</span> 
-				<span class="fr fs20 mlr10"> ¥&nbsp;{{factPrice}}  </span>
+				<span class="fr fs20 mlr10"> <del class="fs15" ms-visible="hasReduce=='1'">¥&nbsp;{{totalPrice}}</del> &nbsp;&nbsp;¥&nbsp;{{factPrice}}</span>
 		</div>
 	</div>
 	<div  style="margin: 30px 0; height: 20px;" ></div>

@@ -13,13 +13,16 @@
     <script type="text/javascript">
     
 	    var webroot = unescape(getRefererParam("basePageUrl"));
+		if(!webroot||"null"==webroot){
+			webroot = "http://www.e-shequ.com/weixin/";
+		}
+		addscript(webroot+"static/js/common_v4.js?v=1");
 	    addcss(webroot+"static/css/header.css");
 	    addcss(webroot+"static/css/common.css");
 	    addcss(webroot+"static/css/common/coupons.css");
-	    addscript(webroot+"static/js/common_v3.js");
-	    addscript(webroot+"common/coupons.js");
-	    addscript(webroot+"paymentdetail.js?v=1");
-	    	
+	    
+	    addscript(webroot+"paymentdetail2.js?v=21");
+		addscript(webroot+"common/coupons.js");	    	
 	</script>
     
 
