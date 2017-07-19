@@ -14,8 +14,9 @@
         
         <script type="text/javascript">
 		    var webroot = unescape(getRefererParam("basePageUrl"));
-		    addcss(webroot+"static/css/common_v2.css");
-		    addscript(webroot+"static/js/common_v3.js");
+			webroot = "http://www.e-shequ.com/weixin/";
+			addscript(webroot+"static/js/common_v4.js?v=1");
+			addcss(webroot+"static/css/common_v2.css");
 		    addscript(webroot+"baojie_richang_pay.js");
 		</script>
         
@@ -235,7 +236,7 @@
 			
 	    <div id="dialog"></div>
         <div ms-include-src="'common/widget.html'"></div>
-        <div ms-include-src="'common/addressv2.html'"></div>
+        <div ms-include-src="'common/address.html'"></div>
         
         <div ms-include-src="'common/couponv2.html'"></div>
 	    <section ms-visible="page=='main'">

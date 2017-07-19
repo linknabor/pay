@@ -11,19 +11,19 @@
 	<script src="static/js/fastclick.min-1.0.6.js"></script>
 	<script src="static/js/avalon.js"></script>
 	<script src="common/coupons.js"></script>
-	
+	<script src="common/commonaddress.js"></script>
 	<script src="static/js/commonpay.js"></script>
 		
 	<script type="text/javascript">
 	    var webroot = unescape(getRefererParam("basePageUrl"));
-		addscript(webroot+"static/js/common_v3.js");
-	    addscript(webroot+"buy.js?v=211");
-	    addcss(webroot+"static/css/header.css");
+		webroot = "http://www.e-shequ.com/weixin/";
+	    addscript(webroot+"static/js/common_v4.js?V=1");
+		addcss(webroot+"static/css/header.css");
 	    addcss(webroot+"static/css/common.css");
 	    addcss(webroot+"static/css/common/coupons.css");
-		addcss(webroot+"static/css/common/address.css");
+	    addscript(webroot+"buy.js");
+
 	</script>
-	<script src="common/commonaddressv2.js?v=201512171"></script>
 	
  <style>
  	[ms-controller]{display:none} 
@@ -166,7 +166,7 @@
 <body ms-controller="root">
 <section ms-visible="control.currentPage=='main'">
 
-    <div class="rule_intro" ms-visible="o.model.type==4">
+    <div class="rule_intro" ms-click="gotosgrouprulr" ms-visible="o.model.type==4">
 		<img alt="" src="static/images/group/img_tuangou_zhifu.png" style="100%;">
 	</div>
 	<div style="width:100%;" ms-visible="o.model.type==4">
@@ -177,12 +177,12 @@
 	<div class="addr_area" ms-click="op.showAddress">
 		<div style="background:url(static/img/bg_line_location_top.png) repeat-x;height:2px;background-size: 100% 2px;">&nbsp;</div>
 		<div style="text-align:center;background-color: #f7f7f1;">
-			<a href="#" class="btn-plain add_btn_style" ms-visible="!addr.checkedAddress.receiveName" style="">选择收货地址</a>
+			<a href="#" class="btn-plain add_btn_style" ms-visible="!model.address.receiveName" style="">选择收货地址</a>
 		</div>
-		<a  href="#" class="menu-link fs14 addr_detail" ms-visible="addr.checkedAddress.receiveName">
-			<span style="color:#3b3937;">{{addr.checkedAddress.receiveName}}</span>
-			<span style="margin-left:15px;color:#3b3937;">{{addr.checkedAddress.tel}}</span>
-			<div class="addr_location">{{addr.checkedAddress.province}}{{addr.checkedAddress.city}}{{addr.checkedAddress.county}}（{{addr.checkedAddress.xiaoquName}}）{{addr.checkedAddress.detailAddress}}</div>
+		<a  href="#" class="menu-link fs14 addr_detail" ms-visible="model.address.receiveName">
+			<span style="color:#3b3937;">{{model.address.receiveName}}</span>
+			<span style="margin-left:15px;color:#3b3937;">{{model.address.tel}}</span>
+			<div class="addr_location">{{model.address.province}}{{model.address.city}}{{model.address.county}}（{{model.address.xiaoquName}}）{{model.address.detailAddress}}</div>
 		</a>
 		<div style="background:url(static/img/bg_line_location_bottom.png) repeat-x;height:2px;background-size: 100% 2px;">&nbsp;</div>
 	</div>
@@ -252,7 +252,7 @@
 	</div>
 </section>
 
-<div ms-include-src="'common/commonaddressv2.html?v=20151006005'"></div>
+<div ms-include-src="'common/commonaddress.html'"></div>
 
 <section ms-visible="control.currentPage=='coupons'">
 	<div ms-include-src="'common/coupons.html'"></div>
