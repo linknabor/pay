@@ -11,18 +11,16 @@
 	<script src="static/js/fastclick.min-1.0.6.js"></script>
 	<script src="static/js/avalon.js"></script>
 	<script src="common/coupons.js"></script>
-	<script src="common/commonaddress.js"></script>
+	
 	<script src="static/js/commonpay.js"></script>
 		
 	<script type="text/javascript">
 	    var webroot = unescape(getRefererParam("basePageUrl"));
-		webroot = "http://www.e-shequ.com/weixin/";
-	    addscript(webroot+"static/js/common_v4.js?V=1");
-		addcss(webroot+"static/css/header.css");
+	    addcss(webroot+"static/css/header.css");
 	    addcss(webroot+"static/css/common.css");
 	    addcss(webroot+"static/css/common/coupons.css");
+	    addscript(webroot+"static/js/common_v3.js");
 	    addscript(webroot+"buy.js");
-
 	</script>
 	
  <style>
@@ -252,7 +250,7 @@
 	</div>
 </section>
 
-<div ms-include-src="'common/commonaddress.html'"></div>
+<div ms-include-src="'common/address.html'"></div>
 
 <section ms-visible="control.currentPage=='coupons'">
 	<div ms-include-src="'common/coupons.html'"></div>
