@@ -163,7 +163,7 @@ var addrModel={
 	addresses:[],
 	toAddAddress : function(){
 		
-		if (o.model.supportedAddress.province) {
+		if (o.model.supportedAddress) {
 			var province = o.model.supportedAddress.province;
 			var city = o.model.supportedAddress.city;
 			var county = o.model.supportedAddress.county;
