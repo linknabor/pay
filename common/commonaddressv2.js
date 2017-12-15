@@ -162,22 +162,26 @@ var addrModel={
     xiaoquName:'',
 	addresses:[],
 	toAddAddress : function(){
-		var province = o.model.supportedAddress.province;
-		var city = o.model.supportedAddress.city;
-		var county = o.model.supportedAddress.county;
-		var xiaoqu = o.model.supportedAddress.xiaoquName;
 		
-		o.addr.province.name = province;
-		o.addr.province.id = o.model.supportedAddress.provinceId;
-		o.addr.city.name = city;
-		o.addr.city.id = o.model.supportedAddress.cityId;
-		o.addr.county.name = county;
-		o.addr.county.id = o.model.supportedAddress.countyId;
-		o.addr.xiaoquName = xiaoqu;
-		o.addr.xiaoquId = o.model.supportedAddress.xiaoquId;
-		o.addr.xiaoquAddress = o.model.supportedAddress.xiaoquAddr;
+		if (o.model.supportedAddress.province) {
+			var province = o.model.supportedAddress.province;
+			var city = o.model.supportedAddress.city;
+			var county = o.model.supportedAddress.county;
+			var xiaoqu = o.model.supportedAddress.xiaoquName;
+			
+			o.addr.province.name = province;
+			o.addr.province.id = o.model.supportedAddress.provinceId;
+			o.addr.city.name = city;
+			o.addr.city.id = o.model.supportedAddress.cityId;
+			o.addr.county.name = county;
+			o.addr.county.id = o.model.supportedAddress.countyId;
+			o.addr.xiaoquName = xiaoqu;
+			o.addr.xiaoquId = o.model.supportedAddress.xiaoquId;
+			o.addr.xiaoquAddress = o.model.supportedAddress.xiaoquAddr;
+			
+			o.addr.distinct = province+city+county;
+		}
 		
-		o.addr.distinct = province+city+county;
         o.control.currentPage = "addAddressForm";
     },
 	check: function(address) {
