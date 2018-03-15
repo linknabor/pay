@@ -162,27 +162,37 @@ var addrModel={
     xiaoquName:'',
 	addresses:[],
 	toAddAddress : function(){
-		var province = o.model.supportedAddress.province;
-		var city = o.model.supportedAddress.city;
-		var county = o.model.supportedAddress.county;
-		var xiaoqu = o.model.supportedAddress.xiaoquName;
 		
-		o.addr.province.name = province;
-		o.addr.province.id = o.model.supportedAddress.provinceId;
-		o.addr.city.name = city;
-		o.addr.city.id = o.model.supportedAddress.cityId;
-		o.addr.county.name = county;
-		o.addr.county.id = o.model.supportedAddress.countyId;
-		o.addr.xiaoquName = xiaoqu;
-		o.addr.xiaoquId = o.model.supportedAddress.xiaoquId;
-		o.addr.xiaoquAddress = o.model.supportedAddress.xiaoquAddr;
+		if (o.model.supportedAddress) {
+			var province = o.model.supportedAddress.province;
+			var city = o.model.supportedAddress.city;
+			var county = o.model.supportedAddress.county;
+			var xiaoqu = o.model.supportedAddress.xiaoquName;
+			
+			o.addr.province.name = province;
+			o.addr.province.id = o.model.supportedAddress.provinceId;
+			o.addr.city.name = city;
+			o.addr.city.id = o.model.supportedAddress.cityId;
+			o.addr.county.name = county;
+			o.addr.county.id = o.model.supportedAddress.countyId;
+			o.addr.xiaoquName = xiaoqu;
+			o.addr.xiaoquId = o.model.supportedAddress.xiaoquId;
+			o.addr.xiaoquAddress = o.model.supportedAddress.xiaoquAddr;
+			
+			o.addr.distinct = province+city+county;
+		}
 		
-		o.addr.distinct = province+city+county;
         o.control.currentPage = "addAddressForm";
     },
 	check: function(address) {
+		/*自己添加的*/
+		$('#infoname').text(address.receiveName) ;
+		$('#infotel').text(address.tel) ;
+		var str = address.province + address.city+ address.county+'('+address.xiaoquName+'）'+address.detailAddress;
+		$('#infoaddr').text(str) ;
+		/*结束*/
+
     	o.addr.checkedAddress = address;
-        //alert(o.addr.checkedAddress.xiaoquName);
 		o.control.currentPage = "main";
 		
     },
