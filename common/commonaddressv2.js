@@ -185,8 +185,14 @@ var addrModel={
         o.control.currentPage = "addAddressForm";
     },
 	check: function(address) {
+		/*自己添加的*/
+		$('#infoname').text(address.receiveName) ;
+		$('#infotel').text(address.tel) ;
+		var str = address.province + address.city+ address.county+'('+address.xiaoquName+'）'+address.detailAddress;
+		$('#infoaddr').text(str) ;
+		/*结束*/
+
     	o.addr.checkedAddress = address;
-        //alert(o.addr.checkedAddress.xiaoquName);
 		o.control.currentPage = "main";
 		
     },
