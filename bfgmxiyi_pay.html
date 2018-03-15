@@ -17,7 +17,7 @@
 		    var webroot = unescape(getRefererParam("basePageUrl"));
 		    addcss(webroot+"static/css/common_v2.css");
 		    addscript(webroot+"static/js/common_v3.js");
-		    addscript(webroot+"xiyi_pay.js?v20180103");
+		    addscript(webroot+"xiyi_pay.js");
 		</script>
 		
 		<style type="text/css">
@@ -241,10 +241,9 @@
 				<div id="foot"><div class="paybtn fs18" ms-click="pay">立即支付</div></div>
 			</div>
 		</section>
-        <div ms-include-src="'common/addressv2.html'"></div>
+        <div ms-include-src="'common/address.html'"></div>
         <div ms-include-src="'common/widget.html'"></div>
 		<div ms-include-src="'common/couponv2.html'"></div>
-		<script type="text/jscript" src="static/plugin/jquery.datetimepicker.js"></script>
-		<link rel="stylesheet" href="static/plugin/jquery.datetimepicker.css">
+		
 	</body>
 </html>

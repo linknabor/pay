@@ -6,7 +6,7 @@
 		<meta charset="UTF-8">
 		<title>订单</title>
 		<script src="static/js/jquery.js"></script>
-		<script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+		<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
    		<script src="static/js/fastclick.min-1.0.6.js"></script>
    		<script type="text/jscript" src="static/plugin/jquery.datetimepicker.js"></script>
 		<link rel="stylesheet" href="static/plugin/jquery.datetimepicker.css">
@@ -15,9 +15,12 @@
 		
 		<script type="text/javascript">
 		    var webroot = unescape(getRefererParam("basePageUrl"));
-		    addcss(webroot+"static/css/common_v2.css");
-		    addscript(webroot+"static/js/common_v3.js");
-		    addscript(webroot+"xiyi_pay.js?v20180103");
+			webroot = "http://www.e-shequ.com/weixin/";
+			addscript(webroot+"static/js/common_v4.js?v=1");
+			addcss(webroot+"static/css/common_v2.css");
+
+			addscript(webroot+"xiyi_pay2.js");
+		    
 		</script>
 		
 		<style type="text/css">
@@ -241,10 +244,12 @@
 				<div id="foot"><div class="paybtn fs18" ms-click="pay">立即支付</div></div>
 			</div>
 		</section>
-        <div ms-include-src="'common/addressv2.html'"></div>
+				<script type="text/javascript">
+
+				</script>
+		<div ms-include-src="'common/addressv2.html'"></div>
         <div ms-include-src="'common/widget.html'"></div>
 		<div ms-include-src="'common/couponv2.html'"></div>
-		<script type="text/jscript" src="static/plugin/jquery.datetimepicker.js"></script>
-		<link rel="stylesheet" href="static/plugin/jquery.datetimepicker.css">
+		
 	</body>
 </html>

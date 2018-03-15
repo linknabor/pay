@@ -5,26 +5,25 @@
     <meta content="telephone=no" name="format-detection" />
     <meta charset="UTF-8">
     <title>购买页面</title>
-    <script src="static/js/jquery.js"></script>
+	<script src="static/js/jquery.js"></script>
 	<script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 	<script src="static/js/zepto.min.js"></script>
 	<script src="static/js/fastclick.min-1.0.6.js"></script>
 	<script src="static/js/avalon.js"></script>
 	<script src="static/js/commonpay.js"></script>
-	<script type="text/javascript">
+	<script src="common/coupons.js"></script>
+	 <script type="text/javascript">
 	    var webroot = unescape(getRefererParam("basePageUrl"));
-		addscript(webroot+"static/js/common_v3.js?v2017121111");
+	    addscript(webroot+"static/js/common_v3.js");
+	    addscript(webroot+"multibuy.js?v=1234562345");
 	    addcss(webroot+"static/css/header.css");
 	    addcss(webroot+"static/css/common.css");
 	    addcss(webroot+"static/css/common/coupons.css");
-		addcss(webroot+"static/css/common/address.css");
-	    addscript(webroot+"buy.js?v20180103");
+	    addcss(webroot+"static/css/common/address.css");
 	</script>
-	<script src="common/commonaddressv2.js?v=1"></script>
-	<script src="common/coupons.js"></script>
-	
- <style>
- 	[ms-controller]{display:none} 
+	<script src="common/commonaddressv2.js?v=20151217"></script> 
+ 
+ <style>[ms-controller]{display:none} 
  body{
  	background: #F7F7F1;
  }
@@ -107,38 +106,38 @@
 		margin-right: 15px;
 	}
 	.product_detail{
-		height:110px;
+		width:100%;
+		height:80px;
 		background-color:white;
 	}
 	.product_picture{
-		margin:15px;
-		width:80px;
-		height:80px;
+		margin:10px 15px 0 15px;
+		width:52px;
+		height:52px;
 		float:left;
 		border:1px solid #cecece;
 	}
 	
 	.product_content{
 		margin-right: 10px;
-		margin-left: 110px;
-		padding-top: 25px;
+		margin-left: 80px;
+		padding-top: 10px;
 	}
 	.product_name{
-		font-size:16px;
+		font-size:12px;
 		color:#3b3937;
-		line-height: 20px;
-		height:40px;
-		overflow: hidden;
+		line-height: 16px;
+		height:32px
 	}
 	.product_pri_area{
 		border-bottom: 2px solid #f7f7f1;
 		width: 100%;
-		height:30px;
+		height:35px;
 	}
 	.minus-btn-size{
-		width:30px;
-		height:30px;
-		background-size:30px;
+		width:20px;
+		height:20px;
+		background-size:20px;
 		margin-top: 10px;
 	}
 	.baoyou_desc{
@@ -158,16 +157,31 @@
 	    background-size: 7px 12px;
 	    background-position: right center;
 	}
+	.zzmb{z-index:100000; position: absolute; top:0; left:0; -moz-opacity:0.65; opacity:0.65; filter: alpha(opacity=65); background:#000; width:100%; height:100%;display:block}
 </style>
 </head>
 
 <body ms-controller="root">
+	<!-- load -->
+	
+	<div id="zzmb" class="zzmb" style="display:none;position:fixed;"></div>
+	
+		<div class="load6" id="LoadingBar">
+			<div class="bounce1"></div>
+			<div class="bounce2"></div>
+			<div class="bounce3"></div>
+		</div>
+		<div id="fade" class="black_overlay">
+		</div>
+		
+		<div id="phoneErro"></div>
+	
 <section ms-visible="control.currentPage=='main'">
 
-    <div class="rule_intro" ms-visible="model.type==4">
+    <div class="rule_intro" ms-click="gotosgrouprulr" ms-visible="o.model.type==4">
 		<img alt="" src="static/images/group/img_tuangou_zhifu.png" style="100%;">
 	</div>
-	<div style="width:100%;" ms-visible="model.type==4">
+	<div style="width:100%;" ms-visible="o.model.type==4">
 		<img src="static/images/group/img_tuangou_zhifu.png" style="width: 100%;"/>
 	</div>
 	
@@ -175,68 +189,63 @@
 	<div class="addr_area" ms-click="op.showAddress">
 		<div style="background:url(static/img/bg_line_location_top.png) repeat-x;height:2px;background-size: 100% 2px;">&nbsp;</div>
 		<div style="text-align:center;background-color: #f7f7f1;">
-			<a href="#" class="btn-plain add_btn_style" ms-visible="!addr.checkedAddress.receiveName" style="">选择收货地址</a>
+			<a href="#" class="btn-plain add_btn_style" ms-visible="!model.addresses.receiveName" style="">选择收货地址</a>
 		</div>
-		<a  href="#" class="menu-link fs14 addr_detail" ms-visible="addr.checkedAddress.receiveName">
-			<span style="color:#3b3937;">{{addr.checkedAddress.receiveName}}</span>
-			<span style="margin-left:15px;color:#3b3937;">{{addr.checkedAddress.tel}}</span>
-			<div class="addr_location">{{addr.checkedAddress.province}}{{addr.checkedAddress.city}}{{addr.checkedAddress.county}}（{{addr.checkedAddress.xiaoquName}}）{{addr.checkedAddress.detailAddress}}</div>
+		<a  href="#" class="menu-link fs14 addr_detail" ms-visible="model.addresses.receiveName">
+			<span style="color:#3b3937;">{{model.addresses.receiveName}}</span>
+			<span style="margin-left:15px;color:#3b3937;">{{model.addresses.tel}}</span>
+			<div class="addr_location">{{model.addresses.province}}{{model.addresses.city}}{{model.addresses.county}}（{{model.addresses.xiaoquName}}）{{model.addresses.detailAddress}}</div>
 		</a>
 		<div style="background:url(static/img/bg_line_location_bottom.png) repeat-x;height:2px;background-size: 100% 2px;">&nbsp;</div>
 	</div>
-	<div class="product_detail" >
-		<img class="product_picture" ms-src="{{model.product.smallPicture}}" />
+	<div class="product_detail" ms-repeat-item="model.items" >
+		<img class="product_picture" ms-src="{{item.productThumbPic}}" />
 		<div class="product_content">
-			<div class="product_name">{{model.product.name}}</div>
+			<div class="product_name">{{item.ruleName}}</div>
 			<div class="product_pri_area">
-				<div class="fl fs16 highlight pt5"> ¥{{model.rule.price}} </div>
-				<div class="fl fs13" style="margin-left: 10px;padding-top: 7px;color:#888888"> <del>¥{{model.product.oriPrice}}</del> </div>
-				<div class="fr fs13" style="padding-top: 7px;color:#888888">X {{model.count}}</div>
+				<div class="fl fs16 highlight pt5"> ¥{{item.price}} </div>
+				<!-- <div class="fl fs13" style="margin-left: 10px;padding-top: 7px;color:#888888"> <del>¥{{item.oriPrice}}</del> </div> -->
+				<div class="fr fs13" style="padding-top: 7px;color:#888888">X {{item.count}}</div>
 			</div>
 		</div>
 	</div>
 	
-	<div class="line p15 fs15">
-		<span>商品价格</span> <span class="fr highlight">¥&nbsp;{{model.productAmount}}</span>
-	</div>
-	<div class="line fs15" style="height:50px;line-height: 50px;">
-		<span>购买数量</span> 
-		<span class="fr">
-			<span class="sbtn btn-minus minus-btn-size" ms-class-active="model.count>1" ms-click="op.minusCount"></span>
-			<span class="number fs16">{{model.count}}</span>
-			<span class="sbtn btn-add active minus-btn-size" ms-click="op.addCount"></span>
-		</span>
-	</div>
-	<div class="line p15 fs15" style="height:20px">
-		<span class="fl">快递费</span> 
-		<span class="fl baoyou_desc" ms-visible="model.rule.freeShippingNum<999">&nbsp;&nbsp;{{model.rule.freeShippingNum}}件包邮</span>
-		<span class="fr" ms-visible="model.postFee!=0"> ¥&nbsp;{{model.rule.postageFee}}</span>
-		<span class="fr" ms-visible="model.postFee==0"><del> ¥&nbsp;{{model.rule.postageFee}}</del></span>
-	</div>
-	<div class="line" style="height:30px">
+	<div class="line p15 fs15" style="height:30px">
 		<span class="fl">
 			<span class="total fs15">商品总额</span>
-			<span class="fs10">共{{model.count}}个商品</span>
+			<span class="fs10">共{{model.totalCount}}个商品</span>
 		</span>
-		<span class="fs20 fr" style="margin-right: 5px;">¥&nbsp;{{model.amount}}</span>
+		<span class="fr fs20" style="margin-right: 5px;">¥&nbsp;{{model.totalAmount}}</span>
+	</div>
+<!--	当满减底价为0或者为0.0时不显示活动信息-->
+	<div class="line p15 fs15" style="height:20px" ms-visible="model.collocation.discountAmount>0">
+		<span class="fl">活动优惠</span> 
+		<span class="fl baoyou_desc" >满{{model.collocation.satisfyAmount}}减{{model.collocation.discountAmount}}</span>
+		<span class="fr highlight">&nbsp; -¥{{disCountAmount}}  </span>
+	</div>
+<!--	当满免邮费价为0或者为0.0时不显示包邮信息-->
+	<div class="line p15 fs15" style="height:20px">
+		<span class="fl">{{logisticFeeDisplay}}</span> 
+		<span class="fl baoyou_desc" ms-visible="model.collocation.freeShipAmount>0">满{{model.collocation.freeShipAmount}}包邮</span>
+		<span class="fr"> ¥&nbsp;{{model.logisticsFee}}  </span>
 	</div>
 	
 	<div class="line p15 fs15" style="height:20px" ms-click="op.showCoupons">
 		<span class="fl">现金券</span> 
-		<span class="fl baoyou_desc" >&nbsp;&nbsp;{{model.couponNum}}张可用</span>
+		<span class="fl baoyou_desc" >{{model.couponNum}}张可用</span>
 		<div class="fr right_menu">{{model.couponDesc}}  </div>
 	</div>
-	<div class="p15  highlight" style="height:36px">
-			<span class="fl fs15">支付金额</span> 
-			<span class="fr fs20 mlr10"> ¥&nbsp;{{model.totalAmount}}  </span>
+	<div class="p15  " style="height:36px">
+			<span class="fl highlight fs15">支付金额</span> 
+			<span class="fr highlight fs20 mlr10"> ¥&nbsp;{{model.realAmount}}  </span>
 	</div>
-	<div class="info-wrap bgwhite">
+	<div class="info-wrap bgwhite" ms-visible="marketBuy==0">
 		<div class="section-title">收货时间</div>
 		<a href="#" class="menu-link custom-menu-link fs14" style="height:30px" ms-click="datechoooser.showModal"><i class="address_icon time-icon fl"></i>{{datechoooser.time}}</a>
 	</div>
 	<div  class=" bgwhite">
 		<div class="fs15" style="height:30px;padding:15px 0 5px 15px;">备注</div>
-		<div contenteditable class="content p15" ms-class-has-value="model.comment" ms-click="op.focus" ms-blur="op.storeMemo" style="font-size: 15px;"></div>
+		<div contenteditable class="content p15" ms-class-has-value="o.model.comment" ms-click="op.focus" ms-blur="op.storeMemo" style="font-size: 15px;"></div>
 		<div style="height: 80px;position: relative;">&nbsp;</div>
 	</div>
 	
@@ -250,7 +259,7 @@
 	</div>
 </section>
 
-<div ms-include-src="'common/commonaddressv2.html'"></div>
+<div ms-include-src="'common/commonaddressv2.html?v=111'"></div>
 
 <section ms-visible="control.currentPage=='coupons'">
 	<div ms-include-src="'common/coupons.html'"></div>
