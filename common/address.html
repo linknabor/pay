@@ -269,7 +269,9 @@
                 check: function(address) {
                     adroot.checkedAddress = address;
                     adroot.inuse=false;
-                    checkedAddrCallback(address);
+                    //处理地址无法选择
+                    chooseAddr(address)
+                    //checkedAddrCallback(address);
                 },
                 isChecked:function(address) {
                     return adroot.checkedAddress&&adroot.checkedAddress.id == address.id;
