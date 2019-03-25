@@ -400,7 +400,7 @@ window.common = {
 
 };
 
-checkBindAndBind();
+// checkBindAndBind();
 checkCodeAndLogin();
 common.setTitle(MasterConfig.C("shop_name") + "社区");
 
