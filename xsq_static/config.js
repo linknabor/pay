@@ -4,6 +4,7 @@ var pay = /127|test/.test(location.origin)?'https://test.e-shequ.com/pay/':
 var html =/127|test/.test(location.origin)?'https://test.e-shequ.com/weixin/':
 			/uat/.test(location.origin)?'https://uat.e-shequ.com/xsq/weixin/':
 			'https://www.e-shequ.com/shijiazhuang/weixin/';
+var sjz = "shijiazhuang";
 window.config = {	
 	//请求头公共部分
 		baseUrl:/127|test/.test(location.origin)?'https://test.e-shequ.com/wechat/hexie/wechat/':
@@ -11,7 +12,7 @@ window.config = {
 	  			'https://www.e-shequ.com/shijiazhuang/wechat/hexie/wechat/',
 		//个人中心
 		person_index:{			
-			url1: html+'shijiazhuang'+'orderpay.html',//商品订单 团购订单 服务订单			
+			url1: html+sjz+'orderpay.html',//商品订单 团购订单 服务订单			
 			url2: html+'repair/index.html',//报修单			
 			url3: html+'wuye/index.html?#/myHouse',//绑定房屋 我是业主
 		},
@@ -23,7 +24,7 @@ window.config = {
 			url1: html+'person/index.html',	
 		},
 		repair_orderdetail:{
-			url1: pay+'shijiazhuang'+'orderpay.html',	
+			url1: pay+sjz+'orderpay.html',	
 		},
 		//商品订单板块
 		orderpay_commentxiu:{
@@ -39,7 +40,7 @@ window.config = {
 			url1: html+'person/index.html',//底部导航
 		},
 		wuye_pay:{
-			url1: pay+ 'shijiazhuang' + 'paymentdetail.html'//支付跳转
+			url1: pay+sjz+'wuyepay.html'//支付跳转
 		},
 		wuye_house:{
 			html: /127|test/.test(location.origin)?'test.e-shequ.com':
