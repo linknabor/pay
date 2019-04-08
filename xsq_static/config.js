@@ -26,6 +26,9 @@ window.config = {
 		repair_orderdetail:{
 			url1: pay+sjz+'orderpay.html',	
 		},
+		repair_success:{
+			url1: html+'wuye/index.html',
+		},
 		//商品订单板块
 		orderpay_commentxiu:{
 			url1: html+'repair/index.html',
