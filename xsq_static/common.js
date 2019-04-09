@@ -1,4 +1,4 @@
-import wx from "weixin-js-sdk";
+//import wx from "weixin-js-sdk";
 var MasterConfig = function() {
     
     var t = {
@@ -21,7 +21,7 @@ var MasterConfig = function() {
 
         oauthUrl: "http://open.weixin.qq.com/connect/oauth2/authorize?",
         oauthUrlPostFix:"&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect",
-        oauthUrlPostSilent:"&response_type=code&scope=snsapi_base&state=123#wechat_redirect",
+		oauthUrlPostSilent:"&response_type=code&scope=snsapi_base&state=123#wechat_redirect",
         
         
         baidu_map_key:"RUWUgrEEF5VjoaWsstMMZwOD",
@@ -37,7 +37,7 @@ var MasterConfig = function() {
     e
 } (); 
 
-export var Config = function() {
+var Config = function() {
     var t = {
         download: {
         },
@@ -48,7 +48,7 @@ export var Config = function() {
             no_goods: "更多新品正在陆续推出..."
         },
         user_info: {
-            avatar: "https://www.e-shequ.com/weixin/static/images/logo.jpg",
+            avatar: "https://www.e-shequ.com/xsq/weixin/static/images/logo.jpg",
             nickname: "游客",
             levelname: "普通会员"
         },
@@ -58,7 +58,7 @@ export var Config = function() {
             2 : "大楼VIP"
         },
         coupon:{
-            seedImg:"https://www.e-shequ.com/weixin/static/img/banner/banner_market_shuiguo.jpg"
+            seedImg:"https://www.e-shequ.com/xsq/weixin/static/img/banner/banner_market_shuiguo.jpg"
         }
     },
     e = {};
@@ -171,34 +171,6 @@ function getUrlParam(name) {
     if (r != null) return unescape(r[2]); return null; //返回参数值
 }
 
-function initShareConfig(title,link,img,desc){
-    if(link.indexOf(MasterConfig.C("basePageUrl"))>=0
-            &&link.indexOf('shareCode')<0
-            &&getCookie("shareCode")!=null&&getCookie("shareCode")!=''){
-
-        if(link.indexOf('?')<0) {
-            link = link +"?";
-        }
-        if(link.indexOf('?')<link.length-1){
-            link = link + "&";
-        }
-        link = link + "shareCode="+getCookie("shareCode");
-    }
-
-    wx.ready(function(){
-        wx.onMenuShareTimeline({
-            title:title, // 分享标题
-            link:link, // 分享链接
-            imgUrl:img
-        });
-        wx.onMenuShareAppMessage({
-            title: title, // 分享标题
-            desc: desc, // 分享描述
-            link: link, // 分享链接
-            imgUrl: img
-        });
-    });
-}
 function checkFromShare(salePlanType,salePlanId) {
     var shareCode = getUrlParam("shareCode");
     if(shareCode!=null&&shareCode!=''){
@@ -214,11 +186,8 @@ function checkFromShare(salePlanType,salePlanId) {
 function checkCodeAndLogin(){
     var getData = common._GET();
     var b = getData.bind;
-    console.log(b)
     var o = getData.code;
-    console.log(o)
     if(!b&&o){
-        console.log(6)
         common.login();
         return false;
     } else {
@@ -232,26 +201,18 @@ function toBindLink(){
     t = MasterConfig.C("oauthUrl");
    var end = MasterConfig.C("oauthUrlPostFix");
     var url = t + "appid=" + MasterConfig.C("bindAppId") + "&redirect_uri=" + encodeURIComponent(n) +end+ "#wechat_redirect";
-    console.log(url);
     location.href = url;
 }
 function checkBindAndBind(){
-    
-    console.log(1)
     var getData = common._GET();
     var b = getData.bind;
-    console.log(b)
     var o = getData.code;
-    console.log(o);
-    console.log(b&&o);
     if(b&&o) {
-        console.log(55)
         common.alert("start api bind"),
         common.invokeApi("POST", "bindWechat/"+MasterConfig.C("bindAppId")+"/" + o, null,
             null,
         function(x) {
             common.alert("api binded")
-            console.log(location.origin);
             location.href = location.origin +common.removeParamFromUrl(["bind","code"]);
         })
     }
@@ -272,7 +233,7 @@ function toRegisterAndBack(){
 }
 
 let AJAXFlag = !0;
-let common = {
+window.common = {
     isDebug: !1,
     getApi: function(e) {
         var o = parseInt(getCookie("BackendPort"));
@@ -301,24 +262,6 @@ let common = {
             null !== n && void 0 !== n && (a.data = JSON.stringify(n), ("PUT" == e || "POST" == e) && (a.contentType = "application/json; charset=UTF-8")),
             $.ajax(a)
         }
-    },
-    initWechat: function(apis) {
-        let n = "POST",
-        a = "getUrlJsSign",
-        i = {url:window.location.href.split('#')[0]},
-        e = function(n) {
-            wx.config({
-                appId: n.result.appId, // 必填，公众号的唯一标识
-                timestamp: n.result.timestamp , // 必填，生成签名的时间戳
-                nonceStr: n.result.nonceStr, // 必填，生成签名的随机串
-                signature: n.result.signature,// 必填，签名，见附录1
-                jsApiList: apis // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
-            });
-        },
-        r = function(n) {
-            alert(n.message==''?"获取支付权限失败！":n.message);
-        };
-        common.invokeApi(n, a, i, null, e, r);
     },
     /**变更才需要重设置*/
         updateUserStatus:function (user) {
@@ -365,14 +308,10 @@ let common = {
         return getCookie("UID")&&isRegisted();
     },
     _GET: function() {
-        console.log(2)
         var e = location.search,
         o = {};
-        console.log(e);
         if ("" === e || void 0 === e) return o;
-        console.log(3)
         e = e.substr(1).split("&");
-        console.log(4)
         for (var n in e) {
             var t = e[n].split("=");
             o[t[0]] = t[1]
@@ -384,12 +323,8 @@ let common = {
         for (var e = arguments.length,
         o = 0; e > o; o++) console.log(arguments[o])
     },
-    // log: function() {
-    //     for (var e = arguments.length,
-    //     o = 0; e > o; o++) {}
-    // },
     alert: function(e) {
-        "" === getCookie("DevDebug") ? console.log(e) : alert(e)
+//      "" === getCookie("DevDebug") ? console.log(e) : alert(e)
     },
     errorTip: function() {
         var e = '<div class="wrapper"></div><div class="box"><p>请重新刷新</p></div>';
@@ -410,16 +345,13 @@ let common = {
     },
     // 添加
     addParamHsah:function() {
-        console.log(location.hash)
         return  location.hash 
     },
     removeParamFromUrl: function(e) {
-        console.log(location.pathname);
         return location.pathname + common.buildUrlParamString(common.removeParamObject(e));
     },
     buildUrlParamString: function(e) {
         var o = "";
-        console.log(5)
         for (var n in e) o += n + "=" + e[n] + "&";
         o = o.slice(0, o.length - 1);
         var t = "" === o || void 0 === o;
@@ -474,4 +406,4 @@ checkBindAndBind();
 checkCodeAndLogin();
 common.setTitle(MasterConfig.C("shop_name")+"社区");
 
-export default common;
+//export default common;
