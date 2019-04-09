@@ -3,15 +3,15 @@
 var MasterConfig = function() {
     var t = {
 
-        baseUrl: "https://uat.e-shequ.com/dhzj3/wechat/hexie/wechat/",
-        basePageUrl:"https://uat.e-shequ.com/dhzj3/weixin/",
-        payPageFolder:"https://uat.e-shequ.com/pay/",
+        baseUrl: "https://test.e-shequ.com/dhzj3/wechat/hexie/wechat",
+        basePageUrl:"https://test.e-shequ.com/dhzj3/weixin/",
+        payPageFolder:"https://test.e-shequ.com/pay/",
         payPageSuffix:"zj3",
-        appId: "wx9ffe0a2b5a64a285",
+        appId: "wx95f46f41ca5e570e",
         oauthUrl: "https://open.weixin.qq.com/connect/oauth2/authorize?",
         oauthUrlPostFix:"&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect",
 		oauthUrlPostSilent:"&response_type=code&scope=snsapi_base&state=123#wechat_redirect",
-        bindAppId: "wx9ffe0a2b5a64a285",
+        bindAppId: "wx95f46f41ca5e570e",
         baidu_map_key:"RUWUgrEEF5VjoaWsstMMZwOD",
         shop_name: "东湖e家园",
         is_debug:true
