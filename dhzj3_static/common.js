@@ -1,9 +1,7 @@
-// import wx from 'weixin-js-sdk';
-
+//开发环境
 var MasterConfig = function() {
     var t = {
-
-        baseUrl: "https://test.e-shequ.com/dhzj3/wechat/hexie/wechat",
+        baseUrl: "https://test.e-shequ.com/dhzj3/wechat/hexie/wechat/",
         basePageUrl:"https://test.e-shequ.com/dhzj3/weixin/",
         payPageFolder:"https://test.e-shequ.com/pay/",
         payPageSuffix:"zj3",
@@ -23,7 +21,8 @@ var MasterConfig = function() {
     },
     e
 } ();
-var Config = function() {
+//角色
+var Config1 = function() {
     var t = {
         download: {
         },
@@ -54,63 +53,8 @@ var Config = function() {
     e
 } ();
 
-function showDialog(title,placeholder,content,onConfirmMsg,onCancelClick){
-    if(!placeholder) {
-        placeholder = "";
-    }
-    if(!title) {
-        title = "提交内容";
-    }
-    if(!content){
-        content = "";
-    }
-    var chatHtml =
-            "<div class='weui_mask' id='dialog_overlay'></div>                                                   "
-            +"<div class='weui_dialog'>                                                       "
-            +"  <div class='dialog_title'>"+title+"</div>                                          "
-            +"  <div class='dialog_content'>                                                  "
-            +"      <textarea class='dialog_textarea' placeholder='"+placeholder+"' id='dialog_content'>"+content+"</textarea>"
-            +"  </div>                                                                        "
-            +"  <div class='dialog_btn_bar'>                                                  "
-            +"      <div class='dialog_btn' id='dialog_cancel'>取消</div>                     "
-            +"      <div class='dialog_btn' id='dialog_confirm'>确定</div>                    "
-            +"  </div>                                                                        "
-            +"</div>                                                                          ";
 
-    $("#dialog").html('');
-    var loadHtml = "";
-    $("#dialog").html(chatHtml);
-    $("#dialog_confirm").click(function(){
-        if(onConfirmMsg){
-            onConfirmMsg($("#dialog_content").val());
-        }
-        $("#dialog").html('');
-    });
-    $("#dialog_cancel").click(function(){
-        $("#dialog").html('');
-        if(onCancelClick){
-            onCancelClick();
-        }
-    });
-}
-Date.prototype.format = function(fmt){
-      var o = {
-        "M+" : this.getMonth()+1,
-        "d+" : this.getDate(),
-        "h+" : this.getHours(),
-        "m+" : this.getMinutes(),
-        "s+" : this.getSeconds(),
-        "q+" : Math.floor((this.getMonth()+3)/3),
-        "S"  : this.getMilliseconds()
-      };
-      if(/(y+)/.test(fmt))
-        fmt=fmt.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length));
-      for(var k in o)
-        if(new RegExp("("+ k +")").test(fmt))
-                fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ?
-                         (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));
-     return fmt;
-}
+ // 请求状态码
 function dealWithAjaxData(o, e, i, r) {
     if (common.log(o, e), e.success) {
         i(e);
@@ -131,59 +75,38 @@ function dealWithAjaxData(o, e, i, r) {
             break;
     }
 }
+//没授权在登录
 function reLogin() {
     setCookie("UID", "", 0),
     common.login(!0)
 }
+// 读取cookie方法
 function getCookie(e) {
     var c_start;
     var c_end;
     return document.cookie.length > 0 && (c_start = document.cookie.indexOf(e + "="), -1 != c_start) ? (c_start = c_start + e.length + 1, c_end = document.cookie.indexOf(";", c_start), -1 == c_end && (c_end = document.cookie.length), unescape(document.cookie.substring(c_start, c_end))) : ""
 }
+ //定义存储cookie方法
 function setCookie(e, o, n) {
     var t = e + "=" + o + "; ",
     i = "";
     null !== n && void 0 !== n && (i = "expires=" + new Date(1e3 * n) + "; "),
     document.cookie = t + i + "path=/"
 }
+
+//判断是不是微信环境
 function isWeChatBrowser() {
     var e = navigator.userAgent.toLowerCase();
     return "micromessenger" == e.match(/MicroMessenger/i) ? !0 : !1
 }
+//获取参数方法
 function getUrlParam(name) {
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
     var r = window.location.search.substr(1).match(reg);  //匹配目标参数
     if (r != null) return unescape(r[2]); return null; //返回参数值
 }
 
-function initShareConfig(title,link,img,desc){
-    if(link.indexOf(MasterConfig.C("basePageUrl"))>=0
-            &&link.indexOf('shareCode')<0
-            &&getCookie("shareCode")!=null&&getCookie("shareCode")!=''){
-
-        if(link.indexOf('?')<0) {
-            link = link +"?";
-        }
-        if(link.indexOf('?')<link.length-1){
-            link = link + "&";
-        }
-        link = link + "shareCode="+getCookie("shareCode");
-    }
-
-    wx.ready(function(){
-        wx.onMenuShareTimeline({
-            title:title, // 分享标题
-            link:link, // 分享链接
-            imgUrl:img
-        });
-        wx.onMenuShareAppMessage({
-            title: title, // 分享标题
-            desc: desc, // 分享描述
-            link: link, // 分享链接
-            imgUrl: img
-        });
-    });
-}
+//检查微信状态  检查用户可不可用
 function checkFromShare(salePlanType,salePlanId) {
     var shareCode = getUrlParam("shareCode");
     if(shareCode!=null&&shareCode!=''){
@@ -207,6 +130,7 @@ function checkCodeAndLogin(){
         return true;
     }
 }
+ //子公众号  挂载父级 
 function toBindLink(){
     var p = common.removeParamObject(["from","bind", "code", "share_id", "isappinstalled", "state", "m", "c", "a"]);
     p = common.addParamObject(p,"bind","true");
@@ -217,6 +141,7 @@ function toBindLink(){
     // console.log(url);
     location.href = url;
 }
+// 检查绑定没绑定
 function checkBindAndBind(){
     var getData = common._GET();
     var b = getData.bind;
@@ -232,27 +157,23 @@ function checkBindAndBind(){
         })
     }
 }
-/**变更才需要重设置*/
-function updateUserStatus(user) {
-    var duration = new Date().getTime()/1000 + 3600*24*30;
-    setCookie("UID", user.uid,  duration);
-    setCookie("currentAddrId", user.currentAddrId, duration);
-    setCookie("tel", user.tel, duration);
-    setCookie("shareCode", user.shareCode, duration);
-}
+
+//只更新地址
 function updateCurrentAddrId(addrId){
     var duration = new Date().getTime()/1000 + 3600*24*30;
     setCookie("currentAddrId", addrId, duration);
 }
+//注册没注册   根据电话判断
 function isRegisted(){
     var tel = getCookie("tel");
     return tel&&tel!='null';
 }
-
+ //没注册 跳转注册页
 function toRegisterAndBack(){
     var n = location.origin + common.removeParamFromUrl(["from", "bind", "code", "share_id", "isappinstalled", "state", "m", "c", "a"]);
     location.href=MasterConfig.C('basePageUrl')+"person/index.html#/register?comeFrom="+encodeURIComponent(n);
 }
+
 
 var AJAXFlag = !0;
 window.common = {
@@ -261,6 +182,7 @@ window.common = {
         var o = parseInt(getCookie("BackendPort"));
         return MasterConfig.C("baseUrl") + (o ? ":" + o: "") + "/" + e;
     },
+    //定义请求方法
     invokeApi: function(e, o, n, t, i, r) {
         if (common.alert("url: " + o), AJAXFlag) { (null === t || void 0 === t) && (t = function() {}),
             (null === i || void 0 === i) && (i = function() {}),
@@ -285,25 +207,7 @@ window.common = {
             $.ajax(a)
         }
     },
-    initWechat: function(apis) {
-        var n = "POST",
-        a = "getUrlJsSign",
-        i = {url:window.location.href.split('#')[0]},
-        e = function(n) {
-            wx.config({
-                appId: n.result.appId, // 必填，公众号的唯一标识
-                timestamp: n.result.timestamp , // 必填，生成签名的时间戳
-                nonceStr: n.result.nonceStr, // 必填，生成签名的随机串
-                signature: n.result.signature,// 必填，签名，见附录1
-                jsApiList: apis // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
-            });
-        },
-        r = function(n) {
-            alert(n.message==''?"获取支付权限失败！":n.message);
-        };
-        common.invokeApi(n, a, i, null, e, r);
-    },
-    
+     //授权
     login: function() {
         var o = this._GET().code;
         if (common.alert("code: " + o), void 0 === o) {
@@ -317,11 +221,20 @@ window.common = {
             AJAXFlag = !1
         },
         function(x) {
-            updateUserStatus(x.result);
+            common.updateUserStatus(x.result);
             AJAXFlag = !0,
             location.href = location.origin +common.removeParamFromUrl(["code"])+common.addParamHsah();
         })
     },
+    /**变更才需要重设置*/
+ updateUserStatus(user) {
+    var duration = new Date().getTime()/1000 + 3600*24*30;
+    setCookie("UID", user.uid,  duration);
+    setCookie("currentAddrId", user.currentAddrId, duration);
+    setCookie("tel", user.tel, duration);
+    setCookie("shareCode", user.shareCode, duration);
+},
+     //入口程序 检查状态
     checkRegisterStatus:function(){
         if(!getCookie("UID")){
             common.login();/**不应该出现*/
@@ -334,9 +247,11 @@ window.common = {
         }
         return true;
     },
+    //需不需要注册
     hasRegister:function(){
         return getCookie("UID")&&isRegisted();
     },
+    //结合微信授权  
     _GET: function() {
         var e = location.search,
         o = {};
@@ -350,19 +265,16 @@ window.common = {
         o
     },
     log: function() {
-        // for (var e = arguments.length,
-        // o = 0; e > o; o++) console.log(arguments[o])
+        for (var e = arguments.length,
+        o = 0; e > o; o++) console.log(arguments[o])
     },
     alert: function(e) {
-        // "" === getCookie("DevDebug") ? console.log(e) : alert(e)
-    },
-    errorTip: function() {
-        var e = '<div class="wrapper"></div><div class="box"><p>请重新刷新</p></div>';
-        $("body").prepend(e)
+        "" === getCookie("DevDebug") ? console.log(e) : alert(e)
     },
     setTitle: function(e) {
         $("title").text(e)
     },
+
     addParamObject:function(e, name,value){
         e[name]=value;
         return e;
@@ -373,7 +285,7 @@ window.common = {
         for (var n in e) delete o[e[n]];
         return o;
     },
-    // 添加
+    // 添加 定义获取哈希值
     addParamHsah:function() {
         // console.log(location.hash)
         return  location.hash 
@@ -403,4 +315,3 @@ window.common = {
 // checkBindAndBind();
 checkCodeAndLogin();
 common.setTitle(MasterConfig.C("shop_name") );
-
