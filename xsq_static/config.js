@@ -12,7 +12,7 @@ window.config = {
 	  			'https://www.e-shequ.com/shijiazhuang/wechat/hexie/wechat/',
 		//个人中心
 		person_index:{			
-			url1: html+sjz+'orderpay.html',//商品订单 团购订单 服务订单			
+			url1: pay+sjz+'orderpay.html',//商品订单 团购订单 服务订单			
 			url2: html+'repair/index.html',//报修单			
 			url3: html+'wuye/index.html?#/myHouse',//绑定房屋 我是业主
 		},
