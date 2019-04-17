@@ -404,6 +404,6 @@ var commonui = {
 }
 checkBindAndBind();
 checkCodeAndLogin();
-common.setTitle(MasterConfig.C("shop_name")+"社区");
+// common.setTitle(MasterConfig.C("shop_name")+"社区");
 
 //export default common;
