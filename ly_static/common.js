@@ -1,23 +1,23 @@
-//import wx from "weixin-js-sdk";
+// import wx from "weixin-js-sdk"
 var MasterConfig = function() {
     
     var t = {
 
-        baseUrl: /127|test/.test(location.origin)?'https://test.e-shequ.com/wechat/hexie/wechat/':
-        /uat/.test(location.origin)?'https://uat.e-shequ.com/xsq/wechat/hexie/wechat/':
-        'https://www.e-shequ.com/shijiazhuang/wechat/hexie/wechat/',
+        baseUrl: /127|test/.test(location.origin)?'https://test.e-shequ.com/liangyou/wechat/hexie/wechat/':
+        /uat/.test(location.origin)?'https://uat.e-shequ.com/liangyou/wechat/hexie/wechat/':
+        'https://www.e-shequ.com/liangyou/wechat/hexie/wechat/',
         
-        basePageUrl:/127|test/.test(location.origin)?'https://test.e-shequ.com/weixin/':
-        /uat/.test(location.origin)?'https://uat.e-shequ.com/xsq/weixin/':
-        'https://www.e-shequ.com/shijiazhuang/weixin/',
-
+        basePageUrl:/127|test/.test(location.origin)?'https://test.e-shequ.com/liangyou/weixin/':
+        /uat/.test(location.origin)?'https://uat.e-shequ.com/liangyou/weixin/':
+        'https://www.e-shequ.com/liangyou/weixin/',
+        
         appId: /127|test/.test(location.origin)?'wx95f46f41ca5e570e':
         /uat/.test(location.origin)?'wx9ffe0a2b5a64a285':
         'wxbd214f5765f346c1',
 
         bindAppId: /127|test/.test(location.origin)?'wx95f46f41ca5e570e':
         /uat/.test(location.origin)?'wx9ffe0a2b5a64a285':
-        'wx02a5197cbf22b0ac',
+        'wxf51b0f0356e2432c',
 
         oauthUrl: "http://open.weixin.qq.com/connect/oauth2/authorize?",
         oauthUrlPostFix:"&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect",
@@ -25,7 +25,6 @@ var MasterConfig = function() {
         
         
         baidu_map_key:"RUWUgrEEF5VjoaWsstMMZwOD",
-        shop_name: "兴",
 
         is_debug:true
     },   
@@ -37,7 +36,7 @@ var MasterConfig = function() {
     e
 } (); 
 
-var Config = function() {
+export var Config = function() {
     var t = {
         download: {
         },
@@ -48,7 +47,7 @@ var Config = function() {
             no_goods: "更多新品正在陆续推出..."
         },
         user_info: {
-            avatar: "https://www.e-shequ.com/xsq/weixin/static/images/logo.jpg",
+            avatar: "https://www.e-shequ.com/liangyou/weixin/static/images/logo.jpg",
             nickname: "游客",
             levelname: "普通会员"
         },
@@ -58,7 +57,7 @@ var Config = function() {
             2 : "大楼VIP"
         },
         coupon:{
-            seedImg:"https://www.e-shequ.com/xsq/weixin/static/img/banner/banner_market_shuiguo.jpg"
+            seedImg:"https://www.e-shequ.com/liangyou/weixin/static/img/banner/banner_market_shuiguo.jpg"
         }
     },
     e = {};
@@ -171,6 +170,34 @@ function getUrlParam(name) {
     if (r != null) return unescape(r[2]); return null; //返回参数值
 }
 
+function initShareConfig(title,link,img,desc){
+    if(link.indexOf(MasterConfig.C("basePageUrl"))>=0
+            &&link.indexOf('shareCode')<0
+            &&getCookie("shareCode")!=null&&getCookie("shareCode")!=''){
+
+        if(link.indexOf('?')<0) {
+            link = link +"?";
+        }
+        if(link.indexOf('?')<link.length-1){
+            link = link + "&";
+        }
+        link = link + "shareCode="+getCookie("shareCode");
+    }
+
+    wx.ready(function(){
+        wx.onMenuShareTimeline({
+            title:title, // 分享标题
+            link:link, // 分享链接
+            imgUrl:img
+        });
+        wx.onMenuShareAppMessage({
+            title: title, // 分享标题
+            desc: desc, // 分享描述
+            link: link, // 分享链接
+            imgUrl: img
+        });
+    });
+}
 function checkFromShare(salePlanType,salePlanId) {
     var shareCode = getUrlParam("shareCode");
     if(shareCode!=null&&shareCode!=''){
@@ -263,6 +290,24 @@ window.common = {
             $.ajax(a)
         }
     },
+    initWechat: function(apis) {
+        let n = "POST",
+        a = "getUrlJsSign",
+        i = {url:window.location.href.split('#')[0]},
+        e = function(n) {
+            wx.config({
+                appId: n.result.appId, // 必填，公众号的唯一标识
+                timestamp: n.result.timestamp , // 必填，生成签名的时间戳
+                nonceStr: n.result.nonceStr, // 必填，生成签名的随机串
+                signature: n.result.signature,// 必填，签名，见附录1
+                jsApiList: apis // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+            });
+        },
+        r = function(n) {
+            alert(n.message==''?"获取支付权限失败！":n.message);
+        };
+        common.invokeApi(n, a, i, null, e, r);
+    },
     /**变更才需要重设置*/
         updateUserStatus:function (user) {
             var duration = new Date().getTime()/1000 + 3600*24*30;
@@ -324,7 +369,7 @@ window.common = {
         o = 0; e > o; o++) console.log(arguments[o])
     },
     alert: function(e) {
-//      "" === getCookie("DevDebug") ? console.log(e) : alert(e)
+        "" === getCookie("DevDebug") ? console.log(e) : alert(e)
     },
     errorTip: function() {
         var e = '<div class="wrapper"></div><div class="box"><p>请重新刷新</p></div>';
@@ -404,6 +449,5 @@ var commonui = {
 }
 checkBindAndBind();
 checkCodeAndLogin();
-// common.setTitle(MasterConfig.C("shop_name")+"社区");
 
-//export default common;
+// export default common;
