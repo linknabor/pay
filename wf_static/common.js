@@ -4,11 +4,11 @@ var MasterConfig = function() {
     var t = {
 
         baseUrl: /127|test/.test(location.origin)?'https://test.e-shequ.com/baofang/wechat/hexie/wechat/':
-        /uat/.test(location.origin)?'https://uat.e-shequ.com/wechat/hexie/wechat/':
+        /uat/.test(location.origin)?'https://uat.e-shequ.com/weifa/wechat/hexie/wechat/':
         'https://www.e-shequ.com/weifa/wechat/hexie/wechat/',
         
         basePageUrl:/127|test/.test(location.origin)?'https://test.e-shequ.com/baofang/weixin/':
-        /uat/.test(location.origin)?'https://uat.e-shequ.com/weixin/':
+        /uat/.test(location.origin)?'https://uat.e-shequ.com/weifa/weixin/':
         'https://www.e-shequ.com/weifa/weixin/',
         
         appId: /127|test/.test(location.origin)?'wx95f46f41ca5e570e':
