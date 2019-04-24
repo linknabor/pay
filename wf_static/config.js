@@ -2,13 +2,13 @@ var pay = /127|test/.test(location.origin)?'https://test.e-shequ.com/pay/':
 		  /uat/.test(location.origin)?'https://uat.e-shequ.com/weixin/':
 		  'https://www.e-shequ.com/pay/';
 
-var html= /127|test/.test(location.origin)?'https://test.e-shequ.com/baofang/weixin/':
+var html= /127|test/.test(location.origin)?'https://test.e-shequ.com/weifa/weixin/':
 		  /uat/.test(location.origin)?'https://uat.e-shequ.com/weifa/weixin/':
 		  'https://www.e-shequ.com/weifa/weixin/';
 var wf = "wf";
 window.config = {
 		//请求头公共部分
-		baseUrl:/127|test/.test(location.origin)?'https://test.e-shequ.com/baofang/wechat/hexie/wechat/':
+		baseUrl:/127|test/.test(location.origin)?'https://test.e-shequ.com/weifa/wechat/hexie/wechat/':
   		/uat/.test(location.origin)?'https://uat.e-shequ.com/weifa/wechat/hexie/wechat/':
   		'https://www.e-shequ.com/weifa/wechat/hexie/wechat/',
 
