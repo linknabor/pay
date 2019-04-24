@@ -1,15 +1,29 @@
 //开发环境
 var MasterConfig = function() {
     var t = {
-        baseUrl: "https://www.e-shequ.com/guizhou/wechat/hexie/wechat/",
-        basePageUrl:"https://www.e-shequ.com/guizhou/weixin/",
-        payPageFolder:"https://www.e-shequ.com/pay/",
-        payPageSuffix:"zj3",
-        appId: "wx753f3c2293294605",
+        // baseUrl: "https://www.e-shequ.com/guizhou/wechat/hexie/wechat/",
+        // basePageUrl:"https://www.e-shequ.com/guizhou/weixin/",
+        // payPageFolder:"https://www.e-shequ.com/pay/",
+        // payPageSuffix:"zj3",
+        // appId: "wx753f3c2293294605",
+        // oauthUrl: "https://open.weixin.qq.com/connect/oauth2/authorize?",
+        // oauthUrlPostFix:"&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect",
+		// oauthUrlPostSilent:"&response_type=code&scope=snsapi_base&state=123#wechat_redirect",
+        // bindAppId: "wx753f3c2293294605",
+        // baidu_map_key:"RUWUgrEEF5VjoaWsstMMZwOD",
+        // shop_name: "贵州幸福家园",
+        // is_debug:true
+
+
+        baseUrl: "https://test.e-shequ.com/baofang/wechat/hexie/wechat/",
+        basePageUrl:"https://test.e-shequ.com/baofang/weixin/",
+        payPageFolder:"https://test.e-shequ.com/pay/",
+        payPageSuffix:"baofang",
+        appId: "wx95f46f41ca5e570e",
         oauthUrl: "https://open.weixin.qq.com/connect/oauth2/authorize?",
         oauthUrlPostFix:"&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect",
 		oauthUrlPostSilent:"&response_type=code&scope=snsapi_base&state=123#wechat_redirect",
-        bindAppId: "wx753f3c2293294605",
+        bindAppId: "wx95f46f41ca5e570e",
         baidu_map_key:"RUWUgrEEF5VjoaWsstMMZwOD",
         shop_name: "贵州幸福家园",
         is_debug:true
@@ -216,7 +230,7 @@ window.common = {
             end = MasterConfig.C("oauthUrlPostFix");
             location.href = t + "appid=" + MasterConfig.C("appId") + "&redirect_uri=" + encodeURIComponent(n) +end+ "#wechat_redirect"
         } else common.alert("start api login"),
-        this.invokeApi("POST", "login/" + o, null,
+        this.invokeApi("POST", "loginBaofang/" + o, null,
         function() {
             AJAXFlag = !1
         },
@@ -240,11 +254,11 @@ updateUserStatus(user) {
             common.login();/**不应该出现*/
             return false;
         }
-        if(!isRegisted()){
-            alert("请先完成注册！");
-            toRegisterAndBack();
-            return false;
-        }
+        // if(!isRegisted()){
+        //     alert("请先完成注册！");
+        //     toRegisterAndBack();
+        //     return false;
+        // }
         return true;
     },
     //需不需要注册
@@ -309,7 +323,34 @@ updateUserStatus(user) {
         end = MasterConfig.C("oauthUrlPostFix");
         location.href = t + "appid=" + e + "&redirect_uri=" + encodeURIComponent(n) +end+ "#wechat_redirect";
     },
-
+    initShareConfig(title,link,img,desc){
+        if(link.indexOf(MasterConfig.C("basePageUrl"))>=0
+                &&link.indexOf('shareCode')<0
+                &&getCookie("shareCode")!=null&&getCookie("shareCode")!=''){
+    
+            if(link.indexOf('?')<0) {
+                link = link +"?";
+            }
+            if(link.indexOf('?')<link.length-1){
+                link = link + "&";
+            }
+            link = link + "shareCode="+getCookie("shareCode");
+        }
+    
+        wx.ready(function(){
+            wx.onMenuShareTimeline({
+                title:title, // 分享标题
+                link:link, // 分享链接
+                imgUrl:img
+            });
+            wx.onMenuShareAppMessage({
+                title: title, // 分享标题
+                desc: desc, // 分享描述
+                link: link, // 分享链接
+                imgUrl: img
+            });
+        });
+    }
 
 };
 
