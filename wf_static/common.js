@@ -37,7 +37,7 @@ var MasterConfig = function() {
     e
 } (); 
 
-export var Config = function() {
+var Config = function() {
     var t = {
         download: {
         },
