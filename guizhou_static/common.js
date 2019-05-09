@@ -4,7 +4,7 @@ var MasterConfig = function() {
         // baseUrl: "https://www.e-shequ.com/guizhou/wechat/hexie/wechat/",
         // basePageUrl:"https://www.e-shequ.com/guizhou/weixin/",
         // payPageFolder:"https://www.e-shequ.com/pay/",
-        // payPageSuffix:"zj3",
+        // payPageSuffix:"guizhou",
         // appId: "wx753f3c2293294605",
         // oauthUrl: "https://open.weixin.qq.com/connect/oauth2/authorize?",
         // oauthUrlPostFix:"&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect",
@@ -13,8 +13,8 @@ var MasterConfig = function() {
         // baidu_map_key:"RUWUgrEEF5VjoaWsstMMZwOD",
         // shop_name: "贵州幸福家园",
         // is_debug:true
-
-
+         
+        
         baseUrl: "https://test.e-shequ.com/baofang/wechat/hexie/wechat/",
         basePageUrl:"https://test.e-shequ.com/baofang/weixin/",
         payPageFolder:"https://test.e-shequ.com/pay/",
@@ -254,11 +254,11 @@ updateUserStatus(user) {
             common.login();/**不应该出现*/
             return false;
         }
-        // if(!isRegisted()){
-        //     alert("请先完成注册！");
-        //     toRegisterAndBack();
-        //     return false;
-        // }
+        if(!isRegisted()){
+            alert("请先完成注册！");
+            toRegisterAndBack();
+            return false;
+        }
         return true;
     },
     //需不需要注册
@@ -351,6 +351,7 @@ updateUserStatus(user) {
             });
         });
     }
+
 
 };
 
