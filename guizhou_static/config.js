@@ -15,7 +15,7 @@ window.config = {
         home:url+name+'/weixin/home/index.html?v=20160229',
     },
     //person
-    gotoGroupDetail:url+namepay+'/guizhourgroups.html?v=20160229#/rgroupinvite',//团购
+    gotoGroupDetail:url+namepay+'/guizhourgroups.html?v=20160229#/rgroupinvite?',//团购
    
      //wuye支付成功
      wuye_zhifu:{
