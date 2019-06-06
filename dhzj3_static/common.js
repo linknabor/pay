@@ -1,15 +1,32 @@
 //开发环境
 var MasterConfig = function() {
     var t = {
-        baseUrl: "https://test.e-shequ.com/dhzj3/wechat/hexie/wechat/",
-        basePageUrl:"https://test.e-shequ.com/dhzj3/weixin/",
-        payPageFolder:"https://test.e-shequ.com/pay/",
+        baseUrl: /127|test/.test(location.origin)?'https://test.e-shequ.com/dhzj3/wechat/hexie/wechat/':
+        /uat/.test(location.origin)?'https://uat.e-shequ.com/dhzj3/wechat/hexie/wechat/':
+        'https://www.e-shequ.com/dhzj3/wechat/hexie/wechat/',
+        
+        basePageUrl:/127|test/.test(location.origin)?'https://test.e-shequ.com/dhzj3/weixin/':
+        /uat/.test(location.origin)?'https://uat.e-shequ.com/dhzj3/weixin/':
+        'https://www.e-shequ.com/dhzj3/weixin/',
+        
+        appId: /127|test/.test(location.origin)?'wx95f46f41ca5e570e':
+        /uat/.test(location.origin)?'wx9ffe0a2b5a64a285':
+        'wxe8dea53aad1a93b9',
+
+        bindAppId: /127|test/.test(location.origin)?'wx95f46f41ca5e570e':
+        /uat/.test(location.origin)?'wx9ffe0a2b5a64a285':
+        'wxbd214f5765f346c1',
+        
+        // baseUrl: "https://uat.e-shequ.com/dhzj3/wechat/hexie/wechat/",
+        // basePageUrl:"https://uat.e-shequ.com/dhzj3/weixin/",
+        // appId: "wx9ffe0a2b5a64a285",
+        // bindAppId: "wx9ffe0a2b5a64a285",
+
+
         payPageSuffix:"zj3",
-        appId: "wx95f46f41ca5e570e",
         oauthUrl: "https://open.weixin.qq.com/connect/oauth2/authorize?",
         oauthUrlPostFix:"&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect",
 		oauthUrlPostSilent:"&response_type=code&scope=snsapi_base&state=123#wechat_redirect",
-        bindAppId: "wx95f46f41ca5e570e",
         baidu_map_key:"RUWUgrEEF5VjoaWsstMMZwOD",
         shop_name: "东湖e家园",
         is_debug:true
@@ -33,7 +50,7 @@ var Config1 = function() {
             no_goods: "更多新品正在陆续推出..."
         },
         user_info: {
-            avatar: "https://test.e-shequ.com/dhzj3/weixin/static/images/logo.jpg",
+            avatar: "https://uat.e-shequ.com/dhzj3/weixin/static/images/logo.jpg",
             nickname: "游客",
             levelname: "普通会员"
         },
@@ -43,7 +60,7 @@ var Config1 = function() {
             2 : "大楼VIP"
         },
         coupon:{
-            seedImg:"https://test.e-shequ.com/dhzj3/weixin/static/img/banner/banner_market_shuiguo.jpg"
+            seedImg:"https://uat.e-shequ.com/dhzj3/weixin/static/img/banner/banner_market_shuiguo.jpg"
         }
     },
     e = {};
@@ -148,7 +165,7 @@ function checkBindAndBind(){
     var o = getData.code;
     if(b&&o) {
         // common.alert("start api bind"),
-        common.invokeApi("POST", "bindWechat/"+MasterConfig.C("bindAppId")+"/" + o, null,
+        common.invokeApi("POST", "bindWechat/"+ o, null,
             null,
         function(x) {
             // common.alert("api binded")
@@ -312,6 +329,6 @@ window.common = {
 
 };
 
-// checkBindAndBind();
+checkBindAndBind();
 checkCodeAndLogin();
 common.setTitle(MasterConfig.C("shop_name") );
