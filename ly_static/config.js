@@ -66,7 +66,7 @@ window.config = {
 			url1: html+'wuye/index.html'//意见发布成功后跳转地址
 		},
 		wuye_zhifu:{
-			url1:html+'wuye/index.html?#/paymentquery'
+			url1:html+'wuye/index.html?#/payEnquiry'
 		}
 		
 };
