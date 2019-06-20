@@ -6,7 +6,7 @@ var namepay='/pay';
 
 window.config = {
     URL:url+name+'/wechat/hexie/wechat/',
-    gotoGroupDetail:url+name+'/weixin/group/rgroupinvite.html?',//团购详情
+    // gotoGroupDetail:url+name+'/weixin/group/rgroupinvite.html?',//团购详情
     footer:{
         home:url+name+'/weixin/home/index.html?v=20160229'
     },
