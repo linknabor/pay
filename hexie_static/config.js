@@ -1,5 +1,5 @@
 var pay = /127|test/.test(location.origin)?'https://test.e-shequ.com/pay/':
-		  /uat/.test(location.origin)?'https://uat.e-shequ.com/weixin/':
+		  /uat/.test(location.origin)?'https://uat.e-shequ.com/pay/':
 		  'https://www.e-shequ.com/pay/';
 
 var html= /127|test/.test(location.origin)?'https://test.e-shequ.com/weixin/':
