@@ -1,5 +1,5 @@
 var pay = /127|test/.test(location.origin)?'https://test.e-shequ.com/pay/':
-		  /uat/.test(location.origin)?'https://uat.e-shequ.com/weixin/':
+		  /uat/.test(location.origin)?'https://uat.e-shequ.com/pay/':
 		  'https://www.e-shequ.com/pay/';
 
 var html= /127|test/.test(location.origin)?'https://test.e-shequ.com/baofang/weixin/':
@@ -11,6 +11,12 @@ window.config = {
 		baseUrl:/127|test/.test(location.origin)?'https://test.e-shequ.com/baofang/wechat/hexie/wechat/':
   		/uat/.test(location.origin)?'https://uat.e-shequ.com/baofang/wechat/hexie/wechat/':
   		'https://www.e-shequ.com/baofang/wechat/hexie/wechat/',
+
+		footer:{
+			wuye:html+'/wuye/index.html?v=20162299',
+			person:html+'/person/index.html?v=20160229',
+			home:html+'/home/index.html?v=20160229'
+		},
 
 		//首页请求
 		person_index:{			
@@ -67,6 +73,14 @@ window.config = {
 		},
 		wuye_zhifu:{
 			url1:html+'wuye/index.html?#/payEnquiry'
+		},
+		// 集市
+		group_onsalesindex:{
+			url:''
+		},
+		//团购
+		rgrops_url :{
+			url:pay+'/bfrgroups.html?v=20160229'
 		}
 		
 };
