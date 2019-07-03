@@ -170,34 +170,7 @@ function getUrlParam(name) {
     if (r != null) return unescape(r[2]); return null; //返回参数值
 }
 
-function initShareConfig(title,link,img,desc){
-    if(link.indexOf(MasterConfig.C("basePageUrl"))>=0
-            &&link.indexOf('shareCode')<0
-            &&getCookie("shareCode")!=null&&getCookie("shareCode")!=''){
 
-        if(link.indexOf('?')<0) {
-            link = link +"?";
-        }
-        if(link.indexOf('?')<link.length-1){
-            link = link + "&";
-        }
-        link = link + "shareCode="+getCookie("shareCode");
-    }
-
-    wx.ready(function(){
-        wx.onMenuShareTimeline({
-            title:title, // 分享标题
-            link:link, // 分享链接
-            imgUrl:img
-        });
-        wx.onMenuShareAppMessage({
-            title: title, // 分享标题
-            desc: desc, // 分享描述
-            link: link, // 分享链接
-            imgUrl: img
-        });
-    });
-}
 function checkFromShare(salePlanType,salePlanId) {
     var shareCode = getUrlParam("shareCode");
     if(shareCode!=null&&shareCode!=''){
@@ -409,7 +382,34 @@ window.common = {
         end = MasterConfig.C("oauthUrlPostFix");
         location.href = t + "appid=" + e + "&redirect_uri=" + encodeURIComponent(n) +end+ "#wechat_redirect";
     },
-
+    initShareConfig(title,link,img,desc){
+        if(link.indexOf(MasterConfig.C("basePageUrl"))>=0
+                &&link.indexOf('shareCode')<0
+                &&getCookie("shareCode")!=null&&getCookie("shareCode")!=''){
+    
+            if(link.indexOf('?')<0) {
+                link = link +"?";
+            }
+            if(link.indexOf('?')<link.length-1){
+                link = link + "&";
+            }
+            link = link + "shareCode="+getCookie("shareCode");
+        }
+    
+        wx.ready(function(){
+            wx.onMenuShareTimeline({
+                title:title, // 分享标题
+                link:link, // 分享链接
+                imgUrl:img
+            });
+            wx.onMenuShareAppMessage({
+                title: title, // 分享标题
+                desc: desc, // 分享描述
+                link: link, // 分享链接
+                imgUrl: img
+            });
+        });
+    }
 
 };
 var commonui = {
