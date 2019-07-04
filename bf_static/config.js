@@ -81,8 +81,12 @@ window.config = {
 		//团购
 		rgrops_url :{
 			url:pay+'/bfrgroups.html?v=20160229'
+		},
+		gotoGroupDetail:pay+'/bfrgroups.html?v=20160229#/rgroupinvite?',//团购
+		//红包
+		rgroup_coupon:{
+			url:pay+'/bfrgroups.html?v=20160229#/coupon?'
 		}
-		
 };
 
 
