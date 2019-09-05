@@ -1,32 +1,32 @@
 //开发环境
 var MasterConfig = function() {
     var t = {
-        baseUrl: "https://www.e-shequ.com/guizhou/wechat/hexie/wechat/",
-        basePageUrl:"https://www.e-shequ.com/guizhou/weixin/",
-        payPageFolder:"https://www.e-shequ.com/pay/",
-        payPageSuffix:"guizhou",
-        appId: "wx753f3c2293294605",
-        oauthUrl: "https://open.weixin.qq.com/connect/oauth2/authorize?",
-        oauthUrlPostFix:"&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect",
-		oauthUrlPostSilent:"&response_type=code&scope=snsapi_base&state=123#wechat_redirect",
-        bindAppId: "wx753f3c2293294605",
-        baidu_map_key:"RUWUgrEEF5VjoaWsstMMZwOD",
-        shop_name: "贵州幸福家园",
-        is_debug:true
-         
-        
-        // baseUrl: "https://test.e-shequ.com/baofang/wechat/hexie/wechat/",
-        // basePageUrl:"https://test.e-shequ.com/baofang/weixin/",
-        // payPageFolder:"https://test.e-shequ.com/pay/",
-        // payPageSuffix:"baofang",
-        // appId: "wx95f46f41ca5e570e",
+        // baseUrl: "https://www.e-shequ.com/guizhou/wechat/hexie/wechat/",
+        // basePageUrl:"https://www.e-shequ.com/guizhou/weixin/",
+        // payPageFolder:"https://www.e-shequ.com/pay/",
+        // payPageSuffix:"guizhou",
+        // appId: "wx753f3c2293294605",
         // oauthUrl: "https://open.weixin.qq.com/connect/oauth2/authorize?",
         // oauthUrlPostFix:"&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect",
 		// oauthUrlPostSilent:"&response_type=code&scope=snsapi_base&state=123#wechat_redirect",
-        // bindAppId: "wx95f46f41ca5e570e",
+        // bindAppId: "wx753f3c2293294605",
         // baidu_map_key:"RUWUgrEEF5VjoaWsstMMZwOD",
         // shop_name: "贵州幸福家园",
         // is_debug:true
+         
+        
+        baseUrl: "https://test.e-shequ.com/wechat/hexie/wechat/",
+        basePageUrl:"https://test.e-shequ.com/weixin/",
+        payPageFolder:"https://test.e-shequ.com/pay/",
+        payPageSuffix:"baofang",
+        appId: "wx95f46f41ca5e570e",
+        oauthUrl: "https://open.weixin.qq.com/connect/oauth2/authorize?",
+        oauthUrlPostFix:"&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect",
+		oauthUrlPostSilent:"&response_type=code&scope=snsapi_base&state=123#wechat_redirect",
+        bindAppId: "wx95f46f41ca5e570e",
+        baidu_map_key:"RUWUgrEEF5VjoaWsstMMZwOD",
+        shop_name: "贵州幸福家园",
+        is_debug:true
     },
 
     e = {};
