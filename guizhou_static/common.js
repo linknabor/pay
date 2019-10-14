@@ -9,7 +9,7 @@ var MasterConfig = function() {
         oauthUrl: "https://open.weixin.qq.com/connect/oauth2/authorize?",
         oauthUrlPostFix:"&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect",
 		oauthUrlPostSilent:"&response_type=code&scope=snsapi_base&state=123#wechat_redirect",
-        bindAppId: "wx95f46f41ca5e570e",
+       // bindAppId: "wx95f46f41ca5e570e",
         baidu_map_key:"RUWUgrEEF5VjoaWsstMMZwOD",
         shop_name: "贵州幸福家园",
         is_debug:true
@@ -79,7 +79,8 @@ function dealWithAjaxData(o, e, i, r) {
             reLogin();
             break;
         case "40002":
-            toBindLink();
+			alert("40002")
+            //toBindLink();
             break;
         case "42032":
             common.wechatAuthorize();
@@ -137,7 +138,7 @@ function checkCodeAndLogin(){
     var getData = common._GET();
     var b = getData.bind;
     var o = getData.code;
-    if(!b&&o){
+    if((!b&&o)) {
         common.login();
         return false;
     } else {
@@ -250,7 +251,9 @@ updateUserStatus(user) {
 },
      //入口程序 检查状态
     checkRegisterStatus:function(){
-        if(!getCookie("UID")){
+		var uid = getCookie("UID");
+		// || typeof(uid)!='undefined'
+        if(!uid){
             common.login();/**不应该出现*/
             return false;
         }
