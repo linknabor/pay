@@ -1,7 +1,7 @@
 var url=/127|test/.test(location.origin)?'https://test.e-shequ.com':
-    /uat/.test(location.origin)?'https://uat.e-shequ.com':
-    'https://www.e-shequ.com';
-var name='/';
+    /uat/.test(location.origin)?'https://uat.e-shequ.cn':
+    'https://www.e-shequ.cn';
+var name='/guizhou';
 var namepay='/pay';
 
 window.config = {
