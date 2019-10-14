@@ -1,32 +1,32 @@
 //开发环境
 var MasterConfig = function() {
     var t = {
-        // baseUrl: "https://www.e-shequ.com/guizhou/wechat/hexie/wechat/",
-        // basePageUrl:"https://www.e-shequ.com/guizhou/weixin/",
-        // payPageFolder:"https://www.e-shequ.com/pay/",
-        // payPageSuffix:"guizhou",
-        // appId: "wx753f3c2293294605",
-        // oauthUrl: "https://open.weixin.qq.com/connect/oauth2/authorize?",
-        // oauthUrlPostFix:"&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect",
-		// oauthUrlPostSilent:"&response_type=code&scope=snsapi_base&state=123#wechat_redirect",
-        // bindAppId: "wx753f3c2293294605",
-        // baidu_map_key:"RUWUgrEEF5VjoaWsstMMZwOD",
-        // shop_name: "贵州幸福家园",
-        // is_debug:true
-         
-        
-        baseUrl: "https://test.e-shequ.com/wechat/hexie/wechat/",
-        basePageUrl:"https://test.e-shequ.com/weixin/",
+        baseUrl: "https://test.e-shequ.com/guizhou/wechat/hexie/wechat/",
+        basePageUrl:"https://test.e-shequ.com/guizhou/weixin/",
         payPageFolder:"https://test.e-shequ.com/pay/",
-        payPageSuffix:"baofang",
+        payPageSuffix:"guizhou",
         appId: "wx95f46f41ca5e570e",
         oauthUrl: "https://open.weixin.qq.com/connect/oauth2/authorize?",
         oauthUrlPostFix:"&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect",
 		oauthUrlPostSilent:"&response_type=code&scope=snsapi_base&state=123#wechat_redirect",
-        bindAppId: "wx95f46f41ca5e570e",
+       // bindAppId: "wx95f46f41ca5e570e",
         baidu_map_key:"RUWUgrEEF5VjoaWsstMMZwOD",
         shop_name: "贵州幸福家园",
         is_debug:true
+         
+        
+        // baseUrl: "https://test.e-shequ.cn/baofang/wechat/hexie/wechat/",
+        // basePageUrl:"https://test.e-shequ.cn/baofang/weixin/",
+        // payPageFolder:"https://test.e-shequ.cn/pay/",
+        // payPageSuffix:"baofang",
+        // appId: "wx95f46f41ca5e570e",
+        // oauthUrl: "https://open.weixin.qq.com/connect/oauth2/authorize?",
+        // oauthUrlPostFix:"&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect",
+		// oauthUrlPostSilent:"&response_type=code&scope=snsapi_base&state=123#wechat_redirect",
+        // bindAppId: "wx95f46f41ca5e570e",
+        // baidu_map_key:"RUWUgrEEF5VjoaWsstMMZwOD",
+        // shop_name: "贵州幸福家园",
+        // is_debug:true
     },
 
     e = {};
@@ -47,7 +47,7 @@ var Config1 = function() {
             no_goods: "更多新品正在陆续推出..."
         },
         user_info: {
-            avatar: "https://www.e-shequ.com/guizhou/weixin/static/images/logo.jpg",
+            avatar: "https://test.e-shequ.com/guizhou/weixin/static/images/logo.jpg",
             nickname: "游客",
             levelname: "普通会员"
         },
@@ -57,7 +57,7 @@ var Config1 = function() {
             2 : "大楼VIP"
         },
         coupon:{
-            seedImg:"https://www.e-shequ.com/guizhou/weixin/static/img/banner/banner_market_shuiguo.jpg"
+            seedImg:"https://test.e-shequ.com/guizhou/weixin/static/img/banner/banner_market_shuiguo.jpg"
         }
     },
     e = {};
@@ -79,7 +79,8 @@ function dealWithAjaxData(o, e, i, r) {
             reLogin();
             break;
         case "40002":
-            toBindLink();
+			alert("40002")
+            //toBindLink();
             break;
         case "42032":
             common.wechatAuthorize();
@@ -137,7 +138,7 @@ function checkCodeAndLogin(){
     var getData = common._GET();
     var b = getData.bind;
     var o = getData.code;
-    if(!b&&o){
+    if((!b&&o)) {
         common.login();
         return false;
     } else {
@@ -250,7 +251,9 @@ updateUserStatus(user) {
 },
      //入口程序 检查状态
     checkRegisterStatus:function(){
-        if(!getCookie("UID")){
+		var uid = getCookie("UID");
+		// || typeof(uid)!='undefined'
+        if(!uid){
             common.login();/**不应该出现*/
             return false;
         }
@@ -355,6 +358,6 @@ updateUserStatus(user) {
 
 };
 
-checkBindAndBind();
+//checkBindAndBind();
 checkCodeAndLogin();
 common.setTitle(MasterConfig.C("shop_name") );
