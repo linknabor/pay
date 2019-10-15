@@ -326,7 +326,7 @@ updateUserStatus(user) {
         end = MasterConfig.C("oauthUrlPostFix");
         location.href = t + "appid=" + e + "&redirect_uri=" + encodeURIComponent(n) +end+ "#wechat_redirect";
     },
-    initShareConfig(title,link,img,desc){
+    initShareConfig(title,link,img,desc,wx){
         if(link.indexOf(MasterConfig.C("basePageUrl"))>=0
                 &&link.indexOf('shareCode')<0
                 &&getCookie("shareCode")!=null&&getCookie("shareCode")!=''){
