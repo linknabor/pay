@@ -5,7 +5,7 @@ var name='/';
 var namepay='/pay';
 
 window.config = {
-
+    newname:'贵州幸福家园',
     URL:url+name+'/wechat/hexie/wechat/',
     footer:{
         wuye:url+name+'/weixin/wuye/index.html',
@@ -17,6 +17,9 @@ window.config = {
      //wuye支付成功
      wuye_zhifu:{
         url:url+name+'/weixin/wuye/index.html?state=123#/payEnquiry'
+    },
+    rgrops_url :{
+        url:url+namepay+'/guizhourgroups.html?state=123'
     },
 
 
