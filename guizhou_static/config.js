@@ -19,7 +19,7 @@ window.config = {
      //wuye支付成功
      wuye_zhifu:{
         url:url+name+'/weixin/wuye/index.html?state=123#/payEnquiry',
-        detail:url+namepay+'/weixin/'
+        detail:url+name+'/weixin/'
     },
     rgrops_url :{
         url:url+namepay+'/guizhourgroups.html?state=123'
