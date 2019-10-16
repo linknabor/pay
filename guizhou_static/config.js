@@ -1,7 +1,7 @@
 var url=/127|test/.test(location.origin)?'https://test.e-shequ.com':
     /uat/.test(location.origin)?'https://uat.e-shequ.com':
     'https://www.e-shequ.com';
-var name='/';
+var name='/guizhou';
 var namepay='/pay';
 
 window.config = {
@@ -16,7 +16,8 @@ window.config = {
    
      //wuye支付成功
      wuye_zhifu:{
-        url:url+name+'/weixin/wuye/index.html?state=123#/payEnquiry'
+        url:url+name+'/weixin/wuye/index.html?state=123#/payEnquiry',
+        detail:url+namepay+'/weixin/'
     },
     rgrops_url :{
         url:url+namepay+'/guizhourgroups.html?state=123'
