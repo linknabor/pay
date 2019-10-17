@@ -1,9 +1,9 @@
 //开发环境
 var MasterConfig = function() {
     var t = {
-        baseUrl: "https://test.e-shequ.com/guizhou/wechat/hexie/wechat/",
-        basePageUrl:"https://test.e-shequ.com/guizhou/weixin/",
-        payPageFolder:"https://test.e-shequ.com/pay/",
+        baseUrl: "https://www.e-shequ.com/guizhou/wechat/hexie/wechat/",
+        basePageUrl:"https://www.e-shequ.com/guizhou/weixin/",
+        payPageFolder:"https://www.e-shequ.com/weixin/pay/",
         payPageSuffix:"guizhou",
         appId: "wx95f46f41ca5e570e",
         oauthUrl: "https://open.weixin.qq.com/connect/oauth2/authorize?",
@@ -47,7 +47,7 @@ var Config1 = function() {
             no_goods: "更多新品正在陆续推出..."
         },
         user_info: {
-            avatar: "https://test.e-shequ.com/guizhou/weixin/static/images/logo.jpg",
+            avatar: "https://www.e-shequ.com/guizhou/weixin/static/images/logo.jpg",
             nickname: "游客",
             levelname: "普通会员"
         },
@@ -57,7 +57,7 @@ var Config1 = function() {
             2 : "大楼VIP"
         },
         coupon:{
-            seedImg:"https://test.e-shequ.com/guizhou/weixin/static/img/banner/banner_market_shuiguo.jpg"
+            seedImg:"https://www.e-shequ.com/guizhou/weixin/static/img/banner/banner_market_shuiguo.jpg"
         }
     },
     e = {};
