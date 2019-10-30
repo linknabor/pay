@@ -81,7 +81,7 @@ var Config = function() {
 
  // 请求状态码
 function dealWithAjaxData(o, e, i, r) {
-    if (common.log(o, e), e.success) {
+    if (e.success) {
         i(e);
         return;
     }
@@ -234,7 +234,7 @@ window.common = {
                 dataType: "json",
                 beforeSend: t,
                 success: function(e) {
-                    common.alert("success data: " + JSON.stringify(e));
+                    // common.alert("success data: " + JSON.stringify(e));
                     dealWithAjaxData(o, e, i, r);
                 },
                 error: function(e) {
@@ -263,6 +263,27 @@ window.common = {
         };
         common.invokeApi(n, a, i, null, e, r);
     },
+    GetImages:function(type) {
+        let imgUrl=getCookie(type);
+        if(imgUrl == undefined ||imgUrl == ''){
+            let n = "GET",
+            a = "userInfo?oriApp="+getUrlParam('oriApp'),
+            i = null,
+            e = function(n) {
+                var duration = new Date().getTime()/1000 + 3600*24*30;
+                for(var j=0;j<n.result.bgImageList.length;j++){
+                    setCookie(n.result.bgImageList[j].type,n.result.bgImageList[j].imgUrl,duration)
+                } 
+                location.reload();
+            },
+            r = function() { 
+            };
+            common.invokeApi(n, a, i, null, e, r);
+        }else {
+            imgUrl=getCookie(type)
+        }
+        return imgUrl;
+   },
      //授权
     login: function() {
 		var o = this._GET().code;
