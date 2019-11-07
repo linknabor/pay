@@ -215,6 +215,7 @@ function toRegisterAndBack(){
 
 var AJAXFlag = !0;
 window.common = {
+    newname:"合协社区",
     isDebug: !1,
     getApi: function(e) {
         var o = parseInt(getCookie("BackendPort"));
