@@ -1,1 +1,0 @@
-webpackJsonp([0],{"S8T/":function(u,g,o){u.exports=o.p+"guizhou_rgroups/img/img_tuangou_zhifu.42de5e3.png"}});
