@@ -175,11 +175,17 @@ function toRegisterAndBack(){
     }
     location.href=MasterConfig.C('basePageUrl')+"person/index.html?"+appurl+"#/register?comeFrom="+encodeURIComponent(n);
 }
-
+//判断当前是那个公众号
+function Getofficial() {
+    var appid=getCookie('appId');
+    if(appid=='undefined') {
+        common.newname='社区'
+    }
+}
 
 var AJAXFlag = !0;
 window.common = {
-    newname:"合协社区",
+    newname:"社区",
     isDebug: !1,
     getApi: function(e) {
         var o = parseInt(getCookie("BackendPort"));
@@ -393,6 +399,6 @@ updateUserStatus(user) {
     }
 
 };
-
+Getofficial();
 checkCodeAndLogin();
 // export {common,MasterConfig,getUrlParam} 
