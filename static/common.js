@@ -173,7 +173,7 @@ function toRegisterAndBack(){
     }else {
         appurl='';
     }
-    location.href=MasterConfig.C('basePageUrl')+"person/index.html?"+appurl+"#/register?comeFrom="+encodeURIComponent(n);
+    location.href=MasterConfig.C('basePageUrl')+"person/index.html?"+appurl+"#/register?comeFrom="+encodeURIComponent(n)+common.addParamHsah();
 }
 //判断当前是那个公众号
 function Getofficial() {
@@ -296,7 +296,7 @@ window.common = {
 		if(document.URL.indexOf('.html?t=') < 0) {
 			 timestamp= (new Date()).valueOf();
 		}
-		var url= location.origin +common.removeParamFromUrl(["code"]);
+		var url= location.origin +common.removeParamFromUrl(["code","appid","state"]);
 		if(url.indexOf('?')<0){
 			url+='?';
 		}else {
